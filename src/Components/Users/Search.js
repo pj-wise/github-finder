@@ -1,18 +1,29 @@
 import React, { Component } from "react";
 
-export class Search extends Component {
+class Search extends Component {
   state = {
     text: ""
   };
 
-  onChange = e => {
-    this.setState({ text: e.target.value });
+  onSubmit = e => {
+    e.preventDefault(); //Forces no reload console.log below would not work without it
+    console.log(this.state.text);
   };
+
+  //REGULAR FUNCTION SYNTAX need to include this.onSubmit.bind(this)
+  //   onSubmit(e) {
+  //     e.preventDefault();
+  //     console.log(this.state.text);
+  //   }
+
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   render() {
     return (
       <div>
-        <form className="form">
+        {/* with regular function syntax above MUST bind(this) */}
+        {/* <form onSubmit={this.onSubmit.bind(this)} className="form">  */}
+        <form onSubmit={this.onSubmit} className="form">
           <input
             type="text"
             name="text"
