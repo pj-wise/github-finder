@@ -14,8 +14,12 @@ class Search extends Component {
 
   onSubmit = e => {
     e.preventDefault(); //Forces no reload console.log below would not work without it
-    this.props.searchUsers(this.state.text);
-    this.setState({ text: "" });
+    if (this.state.text === "") {
+      this.props.setAlert("Please enter something", "light");
+    } else {
+      this.props.searchUsers(this.state.text);
+      this.setState({ text: "" });
+    }
   };
 
   //REGULAR FUNCTION SYNTAX need to include this.onSubmit.bind(this)
@@ -27,6 +31,7 @@ class Search extends Component {
   onChange = e => this.setState({ [e.target.name]: e.target.value }); //can also do name: e.target.value
 
   render() {
+    const { showClear, clearUsers } = this.props;
     return (
       <div>
         {/* with regular function syntax above MUST bind(this) */}
@@ -45,11 +50,8 @@ class Search extends Component {
             className="btn btn-dark btn-block"
           />
         </form>
-        {this.props.showClear && ( // && means if this.props.showClear is true then show button
-          <button
-            className="btn btn-light btn-block"
-            onClick={this.props.clearUsers}
-          >
+        {showClear && ( // && means if this.props.showClear is true then show button
+          <button className="btn btn-light btn-block" onClick={clearUsers}>
             Clear
           </button>
         )}
