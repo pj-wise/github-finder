@@ -7,7 +7,8 @@ class Search extends Component {
 
   onSubmit = e => {
     e.preventDefault(); //Forces no reload console.log below would not work without it
-    console.log(this.state.text);
+    this.props.searchUsers(this.state.text);
+    this.setState({ text: "" });
   };
 
   //REGULAR FUNCTION SYNTAX need to include this.onSubmit.bind(this)
@@ -16,7 +17,7 @@ class Search extends Component {
   //     console.log(this.state.text);
   //   }
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
+  onChange = e => this.setState({ [e.target.name]: e.target.value }); //can also do name: e.target.value
 
   render() {
     return (
