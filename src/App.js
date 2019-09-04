@@ -7,6 +7,7 @@ import "./App.css";
 
 class App extends Component {
   state = {
+    me: {},
     users: [],
     loading: false,
     alert: null
@@ -20,7 +21,9 @@ class App extends Component {
       `https://api.github.com/users/pj-wise/followers`
     );
 
-    this.setState({ users: res.data, loading: false });
+    const myInfo = await axios.get(`https://api.github.com/users/pj-wise`);
+
+    this.setState({ me: myInfo.data, users: res.data, loading: false });
   }
   //end intitial user render
 
@@ -45,7 +48,7 @@ class App extends Component {
   };
 
   render() {
-    const { loading, users } = this.state;
+    const { loading, users, me } = this.state;
     return (
       <div className='App'>
         <Navbar />
@@ -56,7 +59,7 @@ class App extends Component {
             showClear={users.length > 0 ? true : false}
             setAlert={this.setAlert}
           />
-          <Users loading={loading} users={users} />
+          <Users loading={loading} me={me} users={users} />
         </div>
       </div>
     );
