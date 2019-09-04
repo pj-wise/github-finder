@@ -13,17 +13,16 @@ class App extends Component {
   };
 
   // UNCOMMENT FOR USERS TO RENDER AT START
-  // async componentDidMount() {
-  //   this.setState({ loading: true });
+  async componentDidMount() {
+    this.setState({ loading: true });
 
-  //   const res = await axios.get(
-  //     `https://api.github.com/users?client_id=${
-  //       process.env.REACT_APP_GITHUB_CLIENT_ID
-  //     }&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
-  //   );
+    const res = await axios.get(
+      `https://api.github.com/users/pj-wise/followers`
+    );
 
-  //   this.setState({ users: res.data, loading: false });
-  // }
+    this.setState({ users: res.data, loading: false });
+  }
+  //end intitial user render
 
   //SEARCH GITHUB USERS..... PROP DRILLING
   searchUsers = async text => {
@@ -31,9 +30,7 @@ class App extends Component {
 
     const res = await axios.get(
       // SAME call as above ^ changed endpoint dynamic based on text
-      `https://api.github.com/search/users?q=${text}&client_id=${
-        process.env.REACT_APP_GITHUB_CLIENT_ID
-      }&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+      `https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     );
 
     this.setState({ users: res.data.items, loading: false });
@@ -50,9 +47,9 @@ class App extends Component {
   render() {
     const { loading, users } = this.state;
     return (
-      <div className="App">
+      <div className='App'>
         <Navbar />
-        <div className="container">
+        <div className='container'>
           <Search
             searchUsers={this.searchUsers}
             clearUsers={this.clearUsers}
