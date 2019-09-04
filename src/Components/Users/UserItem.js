@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const UserItem = ({ user: { bio, login, avatar_url, html_url } }) => {
+const UserItem = ({ user: { login, avatar_url, html_url } }) => {
   return (
     <div className='card text-center'>
       <img
@@ -11,7 +11,6 @@ const UserItem = ({ user: { bio, login, avatar_url, html_url } }) => {
         style={{ width: "60px" }}
       />
       <h3>{login}</h3>
-      <h2>{bio}</h2>
       <img
         src={`http://ghchart.rshah.org/409ba5/${login}`}
         alt='github activity'
