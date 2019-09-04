@@ -9,7 +9,7 @@ const Users = ({ me, users, loading }) => {
   } else {
     return (
       <div>
-        <UserItem user={me} />
+        {me.login === "pj-wise" ? <UserItem user={me} /> : ""}
         <div style={userStyle}>
           {users.map(user => {
             return <UserItem key={user.id} user={user} />;

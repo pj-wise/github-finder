@@ -29,7 +29,7 @@ class App extends Component {
 
   //SEARCH GITHUB USERS..... PROP DRILLING
   searchUsers = async text => {
-    this.setState({ loading: true });
+    this.setState({ me: {}, loading: true });
 
     const res = await axios.get(
       // SAME call as above ^ changed endpoint dynamic based on text
